@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build-single:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make VARIANT="--single" all
+  build-double:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make VARIANT="--double" all
+  build-32:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make VARIANT="--32" all
+  build-64:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get -y install wget
+      - run: sudo apt-get -y install unzip
+      - run: make VARIANT="--64" all
+workflows:
+  version: 2
+  tomcraft_builds:
+    jobs:
+      - build-single
+      - build-double
+      - build-32
+      - build-64
+
